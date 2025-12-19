@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "localstack"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "localstack"
+  template:
+    metadata:
+      labels:
+        app: "localstack"
+    spec:
+      containers:
+        - name: "localstack"
+          image: localstack/localstack:latest
+          ports:
+            - containerPort: 4566
+          env:
+            - name: SERVICES
+              value: "sts,sqs"
+          volumeMounts:
+            - name: init-scripts
+              mountPath: /etc/localstack/init/ready.d
+              readOnly: true
+      volumes:
+        - name: init-scripts
+          configMap:
+            name: "localstack-init"
+            defaultMode: 0755

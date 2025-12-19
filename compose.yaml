@@ -1,0 +1,11 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack-for-api
+    ports:
+      - "4566:4566" # LocalStack endpoint
+    environment:
+      - SERVICES=sts,sqs
+      - DEBUG=1
+    volumes:
+      - ./helm/templates/files:/etc/localstack/init/ready.d

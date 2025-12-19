@@ -1,0 +1,22 @@
+OpenJDK 64-Bit Server VM warning: Unable to get SVE vector length on this system. Disabling SVE. Specify -XX:UseSVE=0 to shun this warning.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::       (v4.0.2-SNAPSHOT)
+
+2025-12-19T22:29:07.391Z  INFO 1 --- [kubernetesjoblauncher] [           main] c.f.k.KubernetesjoblauncherApplication   : Starting KubernetesjoblauncherApplication v0.0.1-SNAPSHOT using Java 25.0.1 with PID 1 (/app/app.jar started by root in /app)
+2025-12-19T22:29:07.491Z  INFO 1 --- [kubernetesjoblauncher] [           main] c.f.k.KubernetesjoblauncherApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-19T22:29:26.748Z  INFO 1 --- [kubernetesjoblauncher] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-19T22:29:26.787Z  INFO 1 --- [kubernetesjoblauncher] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-19T22:29:26.788Z  INFO 1 --- [kubernetesjoblauncher] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2025-12-19T22:29:27.941Z  INFO 1 --- [kubernetesjoblauncher] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 19255 ms
+2025-12-19T22:29:50.887Z  INFO 1 --- [kubernetesjoblauncher] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-19T22:29:51.089Z  INFO 1 --- [kubernetesjoblauncher] [           main] c.f.k.KubernetesjoblauncherApplication   : Started KubernetesjoblauncherApplication in 52.492 seconds (process running for 63.269)
+2025-12-19T22:29:52.242Z  INFO 1 --- [kubernetesjoblauncher] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-19T22:29:52.283Z  INFO 1 --- [kubernetesjoblauncher] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-19T22:29:52.284Z  INFO 1 --- [kubernetesjoblauncher] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

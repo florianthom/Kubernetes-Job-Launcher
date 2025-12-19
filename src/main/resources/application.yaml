@@ -6,3 +6,14 @@ kubernetesjoblauncher:
   job:
     name: "myjob"
     namespace: "default"
+  queue:
+    # connect from host to localstack: http://localhost:4566
+    # connect form pod to localstack: http://host.docker.internal:4566
+    endpoint: "http://localstack:4566"
+    accesskey: "test"
+    secretkey: "test"
+    region: "eu-central-1"
+    inputqueueurl: "http://sqs.eu-central-1.localhost.localstack.cloud:4566/000000000000/inputqueue"
+  launcher:
+    # has to be higher than the time a pod needs to launch and claiming a message
+    checksqsintervallms: "1000"

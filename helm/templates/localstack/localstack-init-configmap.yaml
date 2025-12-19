@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "localstack-init"
+data:
+  sqs_bootstrap.sh: |
+{{ .Files.Get "files/sqs_bootstrap.sh" | indent 4 }}
