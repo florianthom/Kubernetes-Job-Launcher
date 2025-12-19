@@ -1,0 +1,54 @@
+replicaCount: 1
+
+image:
+  repository: kubernetesjoblauncher
+  pullPolicy: Never # use local image
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  name: "" # helm will generate automatically
+  annotations: {}
+
+podAnnotations: {}
+podLabels: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: localhost
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 256Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+volumes: []
+volumeMounts: []
+
+env:
+  - name: KUBERNETESJOBLAUNCHER_JOB_NAMESPACE
+    value: "default"

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: kubernetesjoblauncher
+
+kubernetesjoblauncher:
+  job:
+    name: "myjob"
+    namespace: "default"
