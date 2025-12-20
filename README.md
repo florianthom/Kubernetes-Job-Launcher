@@ -130,3 +130,7 @@ aws --endpoint-url=http://localstack:4566 sqs receive-message \
 
 * To run new docker image inside cluster just delete the running pod - because of "pullPolicy: Never" (helm values.yaml) the newest image from local registry will be used
 * Use labels → Track multiple Job runs cleanly
+* Make kubernetes not retry the pod itself (if going via AWS SQS) set `backofflimit: 0` and `restartPolicy: Never` in job-template.yaml
+* Current AWS SQS auth uses `accessKey` and `secretKey` - for prod this should be replaced by AWS IAM policies
+* Worker-Apps could use this launcher-app by integrated it via a helm-sub-chart (dependency)
+  * Regarding AWS IAM policies this leads to incorporate the launcher-app service-account into the AWS SQS config
