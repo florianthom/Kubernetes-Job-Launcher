@@ -30,29 +30,52 @@ The architecture of this approach is displayed by following overview.
 <img src="docs/images/architecture-launcher.png" alt="pdf preview" style="width: 50%;">
 </p>
 
-## Important commands
-A selection of useful commands will be presented
+## Run app locally
 
+1. Make sure to connect to the correct cluster in the correct context
 
-* Create docker image and run it
+```
+$ kubectl config current-context
+```
+
+2. Create configmap in cluster
+
+```
+$ kubectl create configmap job-template-cm --from-file=job-template.yaml=helm/files/job-template.yaml
+```
+
+3. Start localstack with docker compose and the application
+
+```
+$ docker compose up -d
+$ ./gradlew bootRun
+```
+
+## Run app in cluster
+
+1. Adjust properties in src/main/java/resources/application.yaml
+2. Create docker image and run it
 
 ```
 $ docker build -t kubernetesjoblauncher:latest .
 $ docker run -p 8081:8080 kubernetesjoblauncher:latest -d
 ```
 
-* Create and install helm package
+3. Create and install helm package
 
 ```
 $ helm package ./
 $ helm upgrade --install kubernetesjoblauncher ./kubernetesjoblauncher-0.1.0.tgz
 ```
 
-* Forward ports to the cluster
+4. Forward ports to the cluster
 
 ```
 $ kubectl port-forward deployment/kubernetesjoblauncher 8081:8080
 ```
+
+## Important commands
+A selection of useful commands will be presented
 
 * Test und Debug via AWS-Cli
 
@@ -102,8 +125,8 @@ aws --endpoint-url=http://localstack:4566 sqs receive-message \
 <img src="docs/images/terminal-dev-overview.png" alt="pdf preview" style="width: 85%;">
 </p>
 
+
 ## Additonal hints
 
-* It is suggested to test the app within a k8s-cluster because there is currently no way to connect to k8s cluster (job-creation) from outside the cluster
 * To run new docker image inside cluster just delete the running pod - because of "pullPolicy: Never" (helm values.yaml) the newest image from local registry will be used
 * Use labels → Track multiple Job runs cleanly

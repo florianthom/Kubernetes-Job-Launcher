@@ -8,4 +8,4 @@ services:
       - SERVICES=sts,sqs
       - DEBUG=1
     volumes:
-      - ./helm/templates/files:/etc/localstack/init/ready.d
+      - ./helm/files:/etc/localstack/init/ready.d

@@ -1,0 +1,9 @@
+{{- if .Values.internalJobtemplate.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: job-template-cm
+data:
+  job-template.yaml: |-
+    {{ .Files.Get "files/job-template.yaml" | indent 4 }}
+{{- end }}
