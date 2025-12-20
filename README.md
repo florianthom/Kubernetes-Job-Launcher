@@ -1,6 +1,7 @@
 # Kubernetes-Job-Launcher
 A Spring Boot app demonstrating how to launch and manage Kubernetes Jobs programmatically based on http requests and sqs messages.
 Jobs are launched by using target-job-template from k8s-configmap either created by helm definition from this or external app.
+The number of processed jobs (pods) is constrained by a `ResourceQuota` defined inside the helm package (max 30 non-terminating pods).
 
 <p align="center" width="100%">
 <img src="docs/images/http-api-overview.png" alt="pdf preview" style="width: 85%;">
@@ -12,6 +13,7 @@ Jobs are launched by using target-job-template from k8s-configmap either created
 * Launches a Kubernetes Job per http request or AWS SQS message using the official Kubernetes Java client
 * Supports dynamic environment variables for Jobs
 * Job templates can be stored in a ConfigMap for easy updates without redeploying the app
+* Constrain the max number of pods
 
 ## Requirements
 
@@ -121,6 +123,12 @@ aws --endpoint-url=http://localstack:4566 sqs receive-message \
 --wait-time-seconds 0
 ```
 
+* Create or update configmap in cluster 
+
+```
+$ kubectl create configmap job-template-cm --from-file=job-template.yaml=helm/files/job-template.yaml --dry-run=client -o yaml | kubectl apply -f -
+```
+
 <p align="center" width="100%">
 <img src="docs/images/terminal-dev-overview.png" alt="pdf preview" style="width: 85%;">
 </p>
@@ -129,8 +137,15 @@ aws --endpoint-url=http://localstack:4566 sqs receive-message \
 ## Additonal hints
 
 * To run new docker image inside cluster just delete the running pod - because of "pullPolicy: Never" (helm values.yaml) the newest image from local registry will be used
+* To restrict the max running pods there is a `ResourceQuota` in place set to max 30 pods. If there are more jobs, the jobs will wait
 * Use labels → Track multiple Job runs cleanly
-* Make kubernetes not retry the pod itself (if going via AWS SQS) set `backofflimit: 0` and `restartPolicy: Never` in job-template.yaml
+* This app assumes following config-items in job-template.yaml
+  * job parallelism: 1
+  * job completions: 1
+  * job backoffLimit: 0 (make kubernetes not retry the pod itself)
+  * job restartPolicy: "Never"
 * Current AWS SQS auth uses `accessKey` and `secretKey` - for prod this should be replaced by AWS IAM policies
 * Worker-Apps could use this launcher-app by integrated it via a helm-sub-chart (dependency)
   * Regarding AWS IAM policies this leads to incorporate the launcher-app service-account into the AWS SQS config
+* What if one tries to create a job while 30 non-terminating pods exists? Another job is created but it wont spawn any pods. The job controller of the given job will be continuously reconcile t trying to start its processing (pod) until it gets a pod-slot.
+* What if there are 100 jobs waiting but only 1 pod-slot is available for processing? There is no garanteed order (e.g. fifo). First job's reconciliation which hits the api will get the pod-slot. This represents eventually-fair semantics

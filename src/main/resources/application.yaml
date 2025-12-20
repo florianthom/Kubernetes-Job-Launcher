@@ -6,7 +6,7 @@ kubernetesjoblauncher:
   launcher:
     namespace: "default"
     # has to be higher than the time a pod needs to launch and claiming a message
-    checksqsintervallms: "10000"
+    checksqsintervallms: "1000"
     jobtemplateconfigmapname: "job-template-cm"
     jobtemplateconfigmapkey: "job-template.yaml"
     jobname: "myjob"
