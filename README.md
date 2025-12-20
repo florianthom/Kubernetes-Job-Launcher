@@ -27,7 +27,7 @@ Jobs are launched by using target-job-template from k8s-configmap either created
 The architecture of this approach is displayed by following overview.
 
 <p align="center" width="100%">
-<img src="docs/images/architecture-launcher.png" alt="pdf preview" style="width: 85%;">
+<img src="docs/images/architecture-launcher.png" alt="pdf preview" style="width: 50%;">
 </p>
 
 ## Important commands
