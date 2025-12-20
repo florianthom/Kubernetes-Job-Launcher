@@ -1,5 +1,12 @@
 # Kubernetes-Job-Launcher
-Demonstrating how to create and manage Kubernetes Jobs programmatically
+A Spring Boot app demonstrating how to launch and manage Kubernetes Jobs programmatically based on http requests and sqs messages.
+Jobs are launched by using target-job-template from k8s-configmap either created by helm definition from this or external app.
+
+
+
+
+
+
 
 
 

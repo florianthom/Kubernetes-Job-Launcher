@@ -49,6 +49,10 @@ resources:
 volumes: []
 volumeMounts: []
 
-env:
-  - name: KUBERNETESJOBLAUNCHER_JOB_NAMESPACE
-    value: "default"
+env: {}
+
+localstack:
+  enabled: true
+
+internalJobtemplate:
+  enabled: true

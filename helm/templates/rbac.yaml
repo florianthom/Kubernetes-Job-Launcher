@@ -7,7 +7,10 @@ metadata:
 rules:
   - apiGroups: ["batch"]
     resources: ["jobs"]
-    verbs: ["get", "list", "create", "delete", "patch", "update"]
+    verbs: ["get", "list", "create"]
+  - apiGroups: [ "" ]
+    resources: [ "configmaps" ]
+    verbs: [ "get", "list" ]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1

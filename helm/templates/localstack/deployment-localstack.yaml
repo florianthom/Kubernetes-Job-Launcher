@@ -1,3 +1,4 @@
+{{- if .Values.localstack.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,3 +30,4 @@ spec:
           configMap:
             name: "localstack-init"
             defaultMode: 0755
+{{- end }}

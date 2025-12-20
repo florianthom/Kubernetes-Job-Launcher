@@ -1,13 +1,11 @@
-package com.florianthom.kubernetesjoblauncher.controller;
+package com.florianthom.kubernetesjoblauncher;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.florianthom.kubernetesjoblauncher.services.JobLauncherService;
 import io.kubernetes.client.openapi.ApiException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import tools.jackson.databind.json.JsonMapper;
