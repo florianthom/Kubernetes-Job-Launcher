@@ -149,3 +149,4 @@ $ kubectl create configmap job-template-cm --from-file=job-template.yaml=helm/fi
   * Regarding AWS IAM policies this leads to incorporate the launcher-app service-account into the AWS SQS config
 * What if one tries to create a job while 30 non-terminating pods exists? Another job is created but it wont spawn any pods. The job controller of the given job will be continuously reconcile t trying to start its processing (pod) until it gets a pod-slot.
 * What if there are 100 jobs waiting but only 1 pod-slot is available for processing? There is no garanteed order (e.g. fifo). First job's reconciliation which hits the api will get the pod-slot. This represents eventually-fair semantics
+* Spring Cloud Kubernetes (dependency) was not used since it supports a limited amount of functionality (e.g. no job interactions)
