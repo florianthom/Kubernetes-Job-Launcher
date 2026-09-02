@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: batch-high-prio-quota
+spec:
+  hard:
+    count/pods: "5"
+  scopeSelector:
+    matchExpressions:
+      - scopeName: NotTerminating
+        operator: Exists
+      - scopeName: PriorityClass
+        operator: In
+        values: ["batch-high-prio"]

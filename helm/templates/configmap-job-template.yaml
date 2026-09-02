@@ -5,5 +5,5 @@ metadata:
   name: job-template-cm
 data:
   job-template.yaml: |-
-    {{ .Files.Get "files/job-template.yaml" | indent 4 }}
+{{ .Files.Get "files/job-template.yaml" | indent 4 }}
 {{- end }}

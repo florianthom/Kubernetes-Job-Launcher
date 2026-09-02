@@ -40,11 +40,11 @@ ingress:
 
 resources:
   limits:
-    cpu: 250m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
   requests:
-    cpu: 250m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
 
 volumes: []
 volumeMounts: []
@@ -52,7 +52,15 @@ volumeMounts: []
 env: {}
 
 localstack:
-  enabled: true
+  enabled: false
 
 internalJobtemplate:
   enabled: true
+
+priorityClassBatchLow:
+  name: ""
+  value: ""
+
+priorityClassBatchHigh:
+  name: ""
+  value: ""

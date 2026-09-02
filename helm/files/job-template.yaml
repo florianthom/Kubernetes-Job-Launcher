@@ -10,8 +10,9 @@ spec:
   ttlSecondsAfterFinished: 10
   template:
     spec:
+      priorityClassName: "batch-low-prio"
       restartPolicy: Never
       containers:
         - name: example
           image: busybox
-          command: ["sh", "-c", "echo Hello && sleep 30 && exit 0"]
+          command: ["sh", "-c", "echo Hello && sleep 20 && exit 0"]
